@@ -1,0 +1,150 @@
+@import './constants.styles.scss';
+@import './functions.styles.scss';
+
+/**
+ * Direction Mixins
+ */
+
+@mixin ltr {
+  [dir='ltr'] & {
+    @content;
+  }
+}
+
+@mixin rtl {
+  [dir='rtl'] & {
+    @content;
+  }
+}
+
+/**
+ * Margin Mixins
+ */
+
+@mixin margin-left($left-multiple) {
+  $value: multiply($base-unit, $left-multiple);
+
+  @include ltr {
+    margin-left: $value;
+  }
+
+  @include rtl {
+    margin-right: $value;
+  }
+}
+
+@mixin margin-right($right-multiple) {
+  $value: multiply($base-unit, $right-multiple);
+
+  @include ltr {
+    margin-right: $value;
+  }
+
+  @include rtl {
+    margin-left: $value;
+  }
+}
+
+@mixin margin-top($top-multiple) {
+  margin-top: multiply($base-unit, $top-multiple);
+}
+
+@mixin margin-bottom($bottom-multiple) {
+  margin-bottom: multiply($base-unit, $bottom-multiple);
+}
+
+@mixin margin-x($left-multiple, $right-multiple) {
+  @include margin-left($left-multiple);
+  @include margin-right($right-multiple);
+}
+
+@mixin margin-y($top-multiple, $bottom-multiple) {
+  @include margin-top($top-multiple);
+  @include margin-bottom($bottom-multiple);
+}
+
+@mixin margin(
+  $top-multiple,
+  $right-multiple,
+  $bottom-multiple,
+  $left-multiple
+) {
+  @include margin-top($top-multiple);
+  @include margin-right($right-multiple);
+  @include margin-bottom($bottom-multiple);
+  @include margin-left($left-multiple);
+}
+
+/**
+ * Padding Mixins
+ */
+
+@mixin padding-left($left-multiple) {
+  $value: multiply($base-unit, $left-multiple);
+
+  @include ltr {
+    padding-left: $value;
+  }
+
+  @include rtl {
+    padding-right: $value;
+  }
+}
+
+@mixin padding-right($right-multiple) {
+  $value: multiply($base-unit, $right-multiple);
+
+  @include ltr {
+    padding-right: $value;
+  }
+
+  @include rtl {
+    padding-left: $value;
+  }
+}
+
+@mixin padding-top($top-multiple) {
+  padding-top: multiply($base-unit, $top-multiple);
+}
+
+@mixin padding-bottom($bottom-multiple) {
+  padding-bottom: multiply($base-unit, $bottom-multiple);
+}
+
+@mixin padding-x($left-multiple, $right-multiple) {
+  @include padding-left($left-multiple);
+  @include padding-right($right-multiple);
+}
+
+@mixin padding-y($top-multiple, $bottom-multiple) {
+  @include padding-top($top-multiple);
+  @include padding-bottom($bottom-multiple);
+}
+
+@mixin padding(
+  $top-multiple,
+  $right-multiple,
+  $bottom-multiple,
+  $left-multiple
+) {
+  @include padding-top($top-multiple);
+  @include padding-right($right-multiple);
+  @include padding-bottom($bottom-multiple);
+  @include padding-left($left-multiple);
+}
+
+/**
+ * Theme Mixins
+ */
+
+@mixin dark-theme {
+  [data-theme='dark'] & {
+    @content;
+  }
+}
+
+@mixin light-theme {
+  [data-theme='light'] & {
+    @content;
+  }
+}

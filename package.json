@@ -1,0 +1,8 @@
+{
+  "name": "coding-nuggets",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@types/react": "^17.0.38",
+    "react": "^17.0.2"
+  }
+}
