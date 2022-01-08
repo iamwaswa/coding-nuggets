@@ -10,6 +10,9 @@ interface IRenderListProps<DataType> {
   ): JSX.Element;
 }
 
+/**
+ * Renders a list of items
+ */
 export class RenderList<DataType> extends Component<
   IRenderListProps<DataType>
 > {
