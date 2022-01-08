@@ -8,6 +8,10 @@ interface IRenderEitherOrProps<Condition> {
   otherwiseRender?: JSX.Element | (() => JSX.Element);
 }
 
+/**
+ * Renders one of two options
+ * if the condition is true otherwise renders the other option
+ */
 export function RenderEitherOr<Condition>({
   ifTrue,
   thenRender,
