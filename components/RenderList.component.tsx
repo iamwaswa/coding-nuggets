@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
+import { Component } from 'react';
 
-type RenderListProps<DataType> = {
+interface IRenderListProps<DataType> {
   items: Array<DataType>;
   renderNoContent?: JSX.Element | (() => JSX.Element);
   renderItem(
@@ -8,25 +8,32 @@ type RenderListProps<DataType> = {
     index: number,
     items: Array<DataType>
   ): JSX.Element;
-};
+}
 
-export function RenderList<DataType>({
-  items,
-  renderNoContent = <></>,
-  renderItem,
-}: RenderListProps<DataType>): JSX.Element | Array<JSX.Element> {
-  const renderListItem = useCallback(
-    (item: DataType, index: number, array: Array<DataType>): JSX.Element => {
-      return renderItem(item, index, array);
-    },
-    [renderItem]
-  );
-
-  if (items.length === 0) {
-    return typeof renderNoContent === `function`
-      ? renderNoContent()
-      : renderNoContent;
+export class RenderList<DataType> extends Component<
+  IRenderListProps<DataType>
+> {
+  constructor(props: IRenderListProps<DataType>) {
+    super(props);
   }
 
-  return items.map(renderListItem);
+  private renderListItem = (
+    item: DataType,
+    index: number,
+    array: Array<DataType>
+  ): JSX.Element => {
+    return this.props.renderItem(item, index, array);
+  };
+
+  render(): JSX.Element | Array<JSX.Element> {
+    const { items, renderNoContent = <></> } = this.props;
+
+    if (items.length === 0) {
+      return typeof renderNoContent === `function`
+        ? renderNoContent()
+        : renderNoContent;
+    }
+
+    return items.map(this.renderListItem);
+  }
 }
