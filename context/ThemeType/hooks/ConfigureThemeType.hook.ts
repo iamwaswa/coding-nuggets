@@ -1,5 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { IThemeType, ThemeType } from '~/context';
+
+enum ThemeType {
+  DARK = 'dark',
+  LIGHT = 'light',
+}
+
+interface IThemeType {
+  themeType: ThemeType;
+  toggleThemeType(): void;
+}
 
 const windowDefined = typeof window !== `undefined`;
 
