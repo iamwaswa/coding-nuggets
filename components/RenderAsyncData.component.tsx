@@ -1,12 +1,15 @@
-import { PropsWithChildren } from 'react';
+type OrNull<Type> = Type | null;
+
+type OrUndefined<Type> = Type | undefined;
 
 export interface IRenderAsyncDataProps<DataType> {
-  data?: DataType;
-  error: Error | null;
+  data: OrUndefined<DataType>;
+  error: OrNull<Error>;
   loading: boolean;
   loadingStateDelay?: number;
   renderData(data: DataType): JSX.Element;
   renderLoading(): JSX.Element;
+  renderNoData?: ReactNode | (() => JSX.Element);
 }
 
 function RenderAsyncDataComponent<DataType>({
@@ -16,6 +19,7 @@ function RenderAsyncDataComponent<DataType>({
   loadingStateDelay = 500,
   renderData,
   renderLoading,
+  renderNoData = <></>,
 }: IRenderAsyncDataProps<DataType>): JSX.Element {
   const showLoading = useDelayedTrueValue(loadingStateDelay);
 
@@ -25,6 +29,10 @@ function RenderAsyncDataComponent<DataType>({
 
   if (loading) {
     return showLoading ? renderLoading() : <></>;
+  }
+
+  if (!data) {
+    return typeof renderNoData === `function` ? renderNoData() : renderNoData;
   }
 
   return renderData(data);
@@ -46,7 +54,7 @@ function withErrorBoundary<DataType>(
   };
 }
 
-function ErrorBoundary({}: PropsWithChildren<{}>): JSX.Element {
+function ErrorBoundary(): JSX.Element {
   throw new Error(`Component not implemented`);
 }
 
