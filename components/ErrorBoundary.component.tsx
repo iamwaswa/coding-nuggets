@@ -2,7 +2,7 @@ import { Component, ErrorInfo, ReactNode } from 'react';
 
 interface IErrorBoundaryProps {
   children: React.ReactNode;
-  renderError(error: Error): JSX.Element;
+  renderError?: (error: Error) => JSX.Element;
 }
 
 interface IErrorBoundaryState {
@@ -32,7 +32,11 @@ export class ErrorBoundary extends Component<
 
   render(): ReactNode {
     if (this.state.error) {
-      return this.props.renderError(this.state.error);
+      return (
+        this.props.renderError?.(this.state.error) ?? (
+          <pre>{JSON.stringify(this.state.error, null, 2)}</pre>
+        )
+      );
     }
 
     return this.props.children;
