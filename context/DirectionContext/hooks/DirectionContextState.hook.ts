@@ -1,6 +1,9 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 
-import { Direction } from '../Direction.context';
+enum Direction {
+  LTR,
+  RTL
+}
 
 /**
  * Reads the state from the direction context.
