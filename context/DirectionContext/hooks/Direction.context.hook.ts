@@ -1,5 +1,11 @@
-import { Direction, DirectionContext } from '../Direction.context';
 import { useContext } from 'react';
+
+enum Direction {
+  LTR,
+  RTL
+}
+
+const DirectionContext = {};
 
 /**
  * Provides the current direction.
