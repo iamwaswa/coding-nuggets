@@ -1,5 +1,8 @@
 import { PropsWithChildren } from 'react';
-import { ThemeContext, useConfigureThemeType } from '~/context';
+
+const ThemeContext = {
+  Provider: null,
+};
 
 export function ThemeTypeContextProvider({
   children,
@@ -9,4 +12,8 @@ export function ThemeTypeContextProvider({
       {children}
     </ThemeContext.Provider>
   );
+}
+
+function useConfigureThemeType(){
+  throw new Error(`Use configure theme type hook not implemented!`);
 }
