@@ -1,6 +1,14 @@
-import { IThemeType, ThemeContext } from '~/context';
-
 import { useContext } from 'react';
+
+enum ThemeType {
+  DARK = 'dark',
+  LIGHT = 'light',
+}
+
+interface IThemeType {
+  themeType: ThemeType;
+  toggleThemeType(): void;
+}
 
 /**
  * Reads the state from the theme context.
