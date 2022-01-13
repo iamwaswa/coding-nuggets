@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
-import { useDelayedTrueValue } from '~/hooks';
-import { OrNull, OrUndefined } from '~/types';
-import { ErrorBoundary } from '~/utils';
+
+type OrNull<Type> = Type | null;
+
+type OrUndefined<Type> = Type | undefined;
 
 export interface IRenderAsyncDataProps<DataType> {
   data: OrUndefined<DataType>;
@@ -39,6 +40,10 @@ function RenderAsyncDataComponent<DataType>({
   return renderData(data);
 }
 
+function useDelayedTrueValue(delay: number){
+  throw new Error(`Use delayed true value is not implemented!`);
+}
+
 function withErrorBoundary<DataType>(
   Component: (props: IRenderAsyncDataProps<DataType>) => JSX.Element
 ): (props: IRenderAsyncDataProps<DataType>) => JSX.Element {
@@ -49,6 +54,10 @@ function withErrorBoundary<DataType>(
       </ErrorBoundary>
     );
   };
+}
+
+function ErrorBoundary(){
+  throw new Error(`Error Boundary component is not implemented`);
 }
 
 export const RenderAsyncData = withErrorBoundary(RenderAsyncDataComponent);
