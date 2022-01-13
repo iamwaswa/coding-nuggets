@@ -1,12 +1,14 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
 
+type OrNull<Type> = Type | null;
+
 interface IErrorBoundaryProps {
   children: React.ReactNode;
   renderError?: (error: Error) => JSX.Element;
 }
 
 interface IErrorBoundaryState {
-  error: Error | null;
+  error: OrNull<Error>;
 }
 
 export class ErrorBoundary extends Component<
