@@ -1,5 +1,13 @@
-import { Direction, DirectionContext } from './Direction.context';
 import { ReactNode } from 'react';
+
+enum Direction {
+  LTR,
+  RTL
+}
+
+const DirectionContext = {
+  Provider: null,
+};
 
 interface IDirectionContextProviderProps {
   children: ReactNode;
