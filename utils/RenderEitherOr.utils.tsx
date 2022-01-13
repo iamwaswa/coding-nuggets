@@ -1,4 +1,6 @@
-import { OrFalsy } from '~/types';
+type Falsy = undefined | null | false | 0 | -0 | 0n | '';
+
+export type OrFalsy<T> = T | Falsy;
 
 interface IRenderEitherOrProps<Condition> {
   ifTrue: OrFalsy<Condition>;
