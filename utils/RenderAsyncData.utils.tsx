@@ -9,8 +9,8 @@ export interface IRenderAsyncDataProps<DataType> {
   error: OrNull<Error>;
   loading: boolean;
   loadingStateDelay?: number;
-  renderData(data: DataType): JSX.Element;
-  renderLoading(): JSX.Element;
+  renderData: ReactNode | ((data: DataType) => JSX.Element);
+  renderLoading: ReactNode | (() => JSX.Element);
   renderNoData?: ReactNode | (() => JSX.Element);
 }
 
@@ -26,18 +26,24 @@ function RenderAsyncDataComponent<DataType>({
   const showLoading = useDelayedTrueValue(loadingStateDelay);
 
   if (error) {
-    throw error;
+    return typeof renderError === `function` ? renderError(error) : renderError;
   }
 
   if (loading) {
-    return showLoading ? renderLoading() : <></>;
+    if (showLoading) {
+      return typeof renderLoading === `function`
+        ? renderLoading()
+        : renderLoading;
+    }
+
+    return <></>;
   }
 
   if (!data) {
     return typeof renderNoData === `function` ? renderNoData() : renderNoData;
   }
 
-  return renderData(data);
+  return typeof renderData === `function` ? renderData(data) : renderData;
 }
 
 function useDelayedTrueValue(delay: number){
