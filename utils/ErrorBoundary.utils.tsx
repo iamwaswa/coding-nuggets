@@ -4,7 +4,7 @@ type OrNull<Type> = Type | null;
 
 interface IErrorBoundaryProps {
   children: React.ReactNode;
-  renderError?: (error: Error) => JSX.Element;
+  renderError?(error: Error): JSX.Element;
 }
 
 interface IErrorBoundaryState {
